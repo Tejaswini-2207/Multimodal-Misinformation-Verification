@@ -1,0 +1,28 @@
+﻿# API secrets
+.env
+.env.*
+
+# Virtual environments
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Generated outputs
+outputs/
+
+# Original archive - images are already extracted
+data/raw/media.zip
+
+# Experimental feature files not required by deployed app
+data/processed/image_features/
+data/processed/fused_features/
+data/processed/*.npy
+data/processed/*.npz
+data/processed/*.joblib
+
+# OS files
+.DS_Store
+Thumbs.db

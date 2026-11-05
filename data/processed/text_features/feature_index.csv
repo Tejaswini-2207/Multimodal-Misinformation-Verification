@@ -1,0 +1,101 @@
+Row_Index,Sample_ID,Claim_Label
+0,SAMPLE_001,False / Fabricated
+1,SAMPLE_002,AI-generated
+2,SAMPLE_003,AI-generated
+3,SAMPLE_004,AI-generated
+4,SAMPLE_005,Altered
+5,SAMPLE_006,AI-altered
+6,SAMPLE_007,AI-generated
+7,SAMPLE_008,AI-generated
+8,SAMPLE_009,False / Fabricated
+9,SAMPLE_010,AI - generated
+10,SAMPLE_011,AI-generated
+11,SAMPLE_012,Altered
+12,SAMPLE_013,AI-generated
+13,SAMPLE_014,AI-generated
+14,SAMPLE_015,Altered
+15,SAMPLE_016,AI-generated
+16,SAMPLE_017,AI-generated
+17,SAMPLE_018,False / Fabricated
+18,SAMPLE_019,False / Fabricated
+19,SAMPLE_020,False / Fabricated
+20,SAMPLE-021,False/Fabricated
+21,SAMPLE-022,False/Fabricated
+22,SAMPLE-023,Misleading
+23,SAMPLE-024,False/Fabricated
+24,SAMPLE-025,False/Fabricated
+25,SAMPLE-026,False/Fabricated
+26,SAMPLE-027,Fake
+27,SAMPLE-028,Misleading
+28,SAMPLE-029,Fake / Fabricated
+29,SAMPLE-030,False / Fabricated
+30,SAMPLE-031,Misleading – Old video
+31,SAMPLE-032,Misleading
+32,SAMPLE-033,: False / Scam
+33,SAMPLE-034,False/Fabricated
+34,SAMPLE-035,False/Fabricated
+35,SAMPLE-036,Old and unrelated visuals
+36,SAMPLE-037,Misleading
+37,SAMPLE-038,Misleading
+38,SAMPLE-039,Deepfake / Manipulated
+39,SAMPLE-040,False/Fabricated
+40,SAMPLE-041,Misleading – Unrelated footage
+41,SAMPLE-042,False/Fabricated
+42,SAMPLE-043,Misleading / Needs qualification
+43,SAMPLE-044,False / Fabricated
+44,SAMPLE-045,False / Fabricated
+45,SAMPLE-046,Partly True / Needs qualification
+46,SAMPLE-047,Misleading – Old footage
+47,SAMPLE-048,Misleading / Distorted
+48,SAMPLE-049,False-AI generated
+49,SAMPLE-050,False / AI-generated
+50,SAMPLE-051,Misleading
+51,SAMPLE-052,AI-generated
+52,SAMPLE-053,AI-generated
+53,SAMPLE-054,AI-generated
+54,SAMPLE-055,AI-generated
+55,SAMPLE-056,AI-generated
+56,SAMPLE-057,AI-generated
+57,SAMPLE-058,AI-generated
+58,SAMPLE-059,AI-generated
+59,SAMPLE-060,AI-generated
+60,SAMPLE-061,AI-generated
+61,SAMPLE-062,AI-generated
+62,SAMPLE-063,AI-generated
+63,SAMPLE-064,False
+64,SAMPLE-065,Altered / Deepfake
+65,SAMPLE-066,False / Scam
+66,SAMPLE-067,True
+67,SAMPLE-068,Mostly False
+68,SAMPLE-069,False / Edited video
+69,SAMPLE-070,False / Satire
+70,SAMPLE-071,True
+71,SAMPLE-072,False / Fabricated
+72,SAMPLE-073,Misleading
+73,SAMPLE-074,False / Unsupported
+74,SAMPLE-075,False (old video)
+75,SAMPLE-076,False / Fabricated
+76,SAMPLE-077,False / Fabricated
+77,SAMPLE-078,False / Fabricated
+78,SAMPLE-079,Misleading
+79,SAMPLE-080,True
+80,SAMPLE-081,False / Fabricated
+81,SAMPLE-082,Misleading
+82,SAMPLE-083,False / AI-generated
+83,SAMPLE-084,Misleading
+84,SAMPLE-085,False / Fabricated
+85,SAMPLE-086,False / Fabricated
+86,SAMPLE-087,False (scripted video)
+87,SAMPLE-088,False / Fabricated
+88,SAMPLE-089,True
+89,SAMPLE-090,False / Misleading context
+90,SAMPLE-091,False / Fabricated
+91,SAMPLE-092,False / Scam
+92,SAMPLE-093,Misleading (old footage)
+93,SAMPLE-094,AI-generated
+94,SAMPLE-095,False / Fabricated
+95,SAMPLE-096,True
+96,SAMPLE-097,False / Fabricated
+97,SAMPLE-098,Altered
+98,SAMPLE-099,False / Scam
+99,SAMPLE-100,AI-generated
