@@ -167,7 +167,13 @@ def retrieve_local_evidence(claim, current_sample_id, top_k=5):
 
     print("\nSearching local dataset...")
 
-    results = retriever.retrieve(claim, top_k=15)
+    # Retrieve evidence while excluding the current sample directly
+    # inside the RAG retriever.
+    results = retriever.retrieve(
+        claim,
+        top_k=15,
+        exclude_sample_id=current_sample_id
+    )
 
     if results is None:
         return []
@@ -198,14 +204,20 @@ def retrieve_local_evidence(claim, current_sample_id, top_k=5):
     ]
 
     if missing_columns:
-        raise ValueError(f"Missing local RAG columns: {missing_columns}")
+        raise ValueError(
+            f"Missing local RAG columns: {missing_columns}"
+        )
 
     current_id = (
-        current_sample_id.strip().upper().replace("_", "-")
+        str(current_sample_id)
+        .strip()
+        .upper()
+        .replace("_", "-")
     )
 
     results = results.copy()
 
+    # Normalize IDs for an additional self-retrieval safety check.
     results["Normalized_ID"] = (
         results["Sample_ID"]
         .astype(str)
@@ -214,17 +226,19 @@ def retrieve_local_evidence(claim, current_sample_id, top_k=5):
         .str.replace("_", "-", regex=False)
     )
 
-    # Exclude the current sample to prevent self-retrieval.
     results = results[
         results["Normalized_ID"] != current_id
     ]
 
+    # Safely convert relevance scores.
     results["Combined_Score"] = pd.to_numeric(
         results["Combined_Score"],
         errors="coerce"
     )
 
-    results = results.dropna(subset=["Combined_Score"])
+    results = results.dropna(
+        subset=["Combined_Score"]
+    )
 
     results = results.sort_values(
         by="Combined_Score",
@@ -237,6 +251,7 @@ def retrieve_local_evidence(claim, current_sample_id, top_k=5):
 
         score = float(row["Combined_Score"])
 
+        # Reject weak matches.
         if score < MIN_LOCAL_SCORE:
             continue
 
@@ -252,11 +267,12 @@ def retrieve_local_evidence(claim, current_sample_id, top_k=5):
         if len(evidence_list) >= top_k:
             break
 
-    print("Relevant local evidence records:", len(evidence_list))
+    print(
+        "Relevant local evidence records:",
+        len(evidence_list)
+    )
 
     return evidence_list
-
-
 # ==========================================================
 # EXTERNAL EVIDENCE RETRIEVAL
 # ==========================================================
@@ -505,8 +521,6 @@ copying or syndication.
 """
 
     return text
-
-
 # ==========================================================
 # HEURISTIC EVIDENCE QUALITY SCORING
 # ==========================================================
@@ -669,8 +683,6 @@ def extract_predicted_label(final_result):
     )
 
     return "INSUFFICIENT_EVIDENCE"
-
-
 # ==========================================================
 # MAIN VERIFICATION PIPELINE
 # ==========================================================
