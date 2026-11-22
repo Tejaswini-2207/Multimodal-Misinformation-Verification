@@ -26,3 +26,6 @@ data/processed/*.joblib
 # OS files
 .DS_Store
 Thumbs.db
+# Logs
+streamlit_error.txt
+streamlit_log.txt

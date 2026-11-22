@@ -305,7 +305,7 @@ Return a structured and evidence-based analysis.
                 }
             ],
             temperature=0.2,
-            max_completion_tokens=1500
+            max_completion_tokens=800
         )
 
         result = response.choices[0].message.content
@@ -319,8 +319,29 @@ Return a structured and evidence-based analysis.
 
     except Exception as error:
 
-        raise RuntimeError(
-            f"Image analysis failed: {error}"
+        error_text = str(error)
+
+        is_rate_limit = (
+            "429" in error_text
+            or "rate_limit" in error_text.lower()
+            or "rate limit" in error_text.lower()
+            or "tokens per minute" in error_text.lower()
+        )
+
+        if is_rate_limit:
+
+            return (
+                "IMAGE ANALYSIS UNAVAILABLE: The vision API rate limit "
+                "was reached. Image analysis could not be completed. "
+                "Continue verification using claim text and retrieved "
+                "evidence only. Do not treat the image as analyzed."
+            )
+
+        return (
+            "IMAGE ANALYSIS UNAVAILABLE: The image-analysis service "
+            f"failed ({error_text}). Continue verification using claim "
+            "text and retrieved evidence only. Do not treat the image "
+            "as analyzed."
         )
 
 

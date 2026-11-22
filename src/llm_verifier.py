@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from groq import Groq
 
 from rag_retriever import RAGEvidenceRetriever
-from image_understanding import analyze_image
+from image_understanding import analyze_image, analyze_image_file
 from external_retriever import ExternalEvidenceRetriever
 from source_validator import validate_sources
 
@@ -687,33 +687,55 @@ def extract_predicted_label(final_result):
 # MAIN VERIFICATION PIPELINE
 # ==========================================================
 
-def verify_claim(sample_id):
+def verify_claim(sample_id=None, claim_override=None, image_path=None):
 
     print("\n==========================================")
     print("   MULTIMODAL MISINFORMATION VERIFIER")
     print("==========================================")
 
-    # STEP 1: Load claim.
-    claim = load_claim(sample_id)
+    # STEP 1: Load claim or use custom claim.
+    if claim_override and claim_override.strip():
+        claim = claim_override.strip()
+        print("\nCUSTOM CLAIM:")
+    else:
+        if not sample_id:
+            raise ValueError("Provide a Sample ID or custom claim.")
+        claim = load_claim(sample_id)
+        print("\nORIGINAL CLAIM:")
 
-    print("\nORIGINAL CLAIM:")
     print(claim)
 
-    # STEP 2: Image analysis.
+        # STEP 2: Image analysis.
     print("\nStep 1: Analysing image...")
 
-    image_analysis = analyze_image(sample_id)
+    if image_path:
+        image_analysis = analyze_image_file(
+            image_path=image_path,
+            claim=claim
+        )
 
-    image_analysis = str(image_analysis)[:1500]
+    elif sample_id:
+        image_analysis = analyze_image(sample_id)
+
+    else:
+        image_analysis = "No image was provided."
+
+    image_analysis = str(image_analysis)[:4000]
 
     print("Image analysis completed.")
+    print(image_analysis)
+
 
     # STEP 3: Local RAG retrieval.
     print("\nStep 2: Retrieving local evidence...")
 
+    retrieval_sample_id = (
+        sample_id if sample_id else "CUSTOM_CLAIM"
+    )
+
     local_evidence = retrieve_local_evidence(
         claim,
-        sample_id,
+        retrieval_sample_id,
         top_k=3
     )
 
@@ -963,16 +985,18 @@ List only supplied URLs and source classifications.
     if not final_result.strip():
         raise ValueError("Groq returned an empty response.")
 
-    # STEP 10: Extract predicted category.
+        # STEP 10: Extract predicted category.
     predicted_label = extract_predicted_label(final_result)
 
-    # STEP 11: Save prediction.
-    save_prediction(
-        sample_id,
-        predicted_label,
-        notes=final_result[:1000]
-    )
+    # STEP 11: Save prediction only for dataset samples.
+    if sample_id:
+        save_prediction(
+            sample_id,
+            predicted_label,
+            notes=final_result[:1000]
+        )
 
+    # STEP 12: Return result to frontend.
     return final_result
 
 
